@@ -1,6 +1,11 @@
 name: Build Android CI
 on:
   workflow_dispatch:
+    inputs:
+      tagname:
+        description: 'tagname'
+        required: true
+        default: 'v2.15.2'
   push:
     tags:
       - 'v[0-9]+.*'
@@ -46,8 +51,8 @@ jobs:
       - name: Create Release
         uses: softprops/action-gh-release@v1
         with:
-          tag_name: ${{ github.ref }}
-          name: Release ${{ github.ref }}
+          tag_name: ${{ github.event.inputs.tagname }}
+          name: Release ${{ github.event.inputs.tagname }}
           files: |
             ./app/build/outputs/apk/release/app-arm64-v8a-release.apk
             ./app/build/outputs/apk/release/app-armeabi-v7a-release.apk
