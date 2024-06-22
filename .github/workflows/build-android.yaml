@@ -42,59 +42,16 @@ jobs:
       - name: "Changelog"
         run: |
            git log -p -n1 -- CHANGELOG.md  | grep -Po '(?<=^\+)(?!\+\+).*' > CHANGELOG_current.md
+
       - name: Create Release
-        id: create_release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        uses: softprops/action-gh-release@v1
         with:
           tag_name: ${{ github.ref }}
-          release_name: Release ${{ github.ref }}
-          body_path: CHANGELOG_current.md
-          draft: false
-          prerelease: ${{ steps.build-config.outputs.is_prerelease }}
-      - name: Upload arm64 release
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_name: VHSCode-arm64--${{ steps.build-config.outputs.version_name }}.apk
-          asset_path: ./app/build/outputs/apk/release/app-arm64-v8a-release.apk
-          asset_content_type: application/vnd.android.package-archive
-      - name: Upload arm release
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_name: VHSCode--arm---${{ steps.build-config.outputs.version_name }}.apk
-          asset_path: ./app/build/outputs/apk/release/app-armeabi-v7a-release.apk
-          asset_content_type: application/vnd.android.package-archive
-      - name: Upload x86_64 release
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_name: VHSCode-x86_64-${{ steps.build-config.outputs.version_name }}.apk
-          asset_path: ./app/build/outputs/apk/release/app-x86_64-release.apk
-          asset_content_type: application/vnd.android.package-archive
-      - name: Upload x86 release
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_name: VHSCode--x86---${{ steps.build-config.outputs.version_name }}.apk
-          asset_path: ./app/build/outputs/apk/release/app-x86-release.apk
-          asset_content_type: application/vnd.android.package-archive
-      - name: Upload GooglePlay bundle
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_name: VHSCode-gplay-${{ steps.build-config.outputs.version_name }}.aab
-          asset_path: ./app/build/outputs/bundle/release/app-release.aab
-          asset_content_type: application/x-authorware-bin
+          name: Release ${{ github.ref }}
+          files: |
+            ./app/build/outputs/apk/release/app-arm64-v8a-release.apk
+            ./app/build/outputs/apk/release/app-armeabi-v7a-release.apk
+            ./app/build/outputs/apk/release/app-x86_64-release.apk
+            ./app/build/outputs/apk/release/app-x86-release.apk
+            ./app/build/outputs/bundle/release/app-release.aab
+          body: "Update code server version to 4.90.2"
