@@ -12,10 +12,10 @@ e2a6ebf286d50b36366a4e718e64304b5738a362169f6cc63798ee17b32b3509  bootstrap-x86_
 """)
 def csVersion = "cs-2023.06.04-r1"
 def csHashes = parseHashes("""
-376f26a7eb31dafb1ce89185a6b3a39b2e19bc3afae020692121792c7fb94fea  cs-aarch64.tgz
-e0c0470a295a11b8bbf85c352eae38eb83dd5758329552f465476b8180580b94  cs-arm.tgz
-62f56f413388377e112f3cef71cf04619f79c7e10426d0f98d51686676b25bef  cs-x86.tgz
-1dea7996013f9f3eb1866f14ee0b7fa36d30df996995ae7ba7edcc9aae1ba47e  cs-x86_64.tgz
+714166c79e47b22ff8908547cce4d93546d2fabbbfda7ba79bf1f2d333fad46d  cs-aarch64.tgz
+b7236b015791b39687467f79c2ec8b9f752d04a2649034893bcae6850ded24f8  cs-arm.tgz
+31cfcdeaadb509091966f0aa7b8a62f12f129cc25bf05fe892d0efda30824622  cs-x86.tgz
+2b870d1069fa92c567a0bdd70ae84c26ff1eb5acd32cf80f3ad2c44d2014e288  cs-x86_64.tgz
 """)
 
 def packageJsonFile = new File(projectDir, "../package.json")
@@ -227,7 +227,7 @@ def downloadCodeServer(String arch, String expectedChecksum, String version) {
     downloadRemoteArchive(
             arch,
             "src/main/cpp/cs-" + arch + ".tgz",
-            "https://github.com/vhqtvn/vscode-android-server/releases/download/" + version + "/cs-" + arch + ".tgz",
+            "https://github.com/HGRgamer/vscode-android-server/releases/download/" + version + "/cs-" + arch + ".tgz",
             expectedChecksum,
             version
     )
