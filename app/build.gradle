@@ -10,7 +10,7 @@ def bootstrapHashes = parseHashes("""
 22da96549f5c78fe62ff608db38fc5583fcfe46cc471d02387e37fb9d11b54c9  bootstrap-i686.zip
 e2a6ebf286d50b36366a4e718e64304b5738a362169f6cc63798ee17b32b3509  bootstrap-x86_64.zip
 """)
-def csVersion = "cs-2023.06.04-r1"
+def csVersion = "cs-2024.06.21-r1"
 def csHashes = parseHashes("""
 714166c79e47b22ff8908547cce4d93546d2fabbbfda7ba79bf1f2d333fad46d  cs-aarch64.tgz
 b7236b015791b39687467f79c2ec8b9f752d04a2649034893bcae6850ded24f8  cs-arm.tgz
